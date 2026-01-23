@@ -1,38 +1,960 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MubClean - Digitaliza tu negocio de limpieza</title>
+    <!-- Google Fonts: Inter & Outfit for modern, premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <style>
+        :root {
+            /* Colors from mp_theme.dart & Design System */
+            --primary-blue: #1565C0;
+            --primary-dark: #0D47A1;
+            --primary-light: #E3F2FD;
+            --secondary-teal: #10B981;
+            /* Success color acting as secondary accent */
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+            --bg-scaffold: #FFFFFF;
+            --bg-surface: #FFFFFF;
+            --bg-alt: #FFFFFF;
+            /* All backgrounds white */
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/">
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-light: #94A3B8;
+            --text-white: #FFFFFF;
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+            --border-light: #E2E8F0;
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="mubclean_marketplace">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+            /* Shadows & Effects */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(21, 101, 192, 0.15);
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 32px;
+            --radius-full: 9999px;
 
-  <title>mubclean_marketplace</title>
-  <link rel="manifest" href="manifest.json">
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Doodles & Backgrounds */
+        .bg-doodle-1 {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231565C0' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .doodle-shape {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-scaffold);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-display);
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+            background-color: var(--bg-surface);
+            /* Ensure defaults to white */
+        }
+
+        .section-white {
+            background-color: var(--bg-surface);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: var(--primary-blue);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: var(--primary-light);
+            color: var(--primary-blue);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+            color: var(--text-white);
+            box-shadow: var(--shadow-md);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-surface);
+            color: var(--primary-blue);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-blue);
+            background-color: var(--primary-light);
+        }
+
+        .btn-text {
+            color: var(--primary-blue);
+            padding: 8px 16px;
+            background: transparent;
+        }
+
+        .btn-text:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--primary-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            background: radial-gradient(circle at top right, rgba(21, 101, 192, 0.05), transparent 40%),
+                radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 40%);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            margin-bottom: 24px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue), #42A5F5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .trust-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-surface);
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(21, 101, 192, 0.2);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--primary-light);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .card-icon .material-icons-round {
+            font-size: 28px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 48px;
+            align-items: center;
+        }
+
+        /* How it Works */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 60px;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .step-item {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-circle {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-surface);
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            color: var(--primary-blue);
+            border-radius: 45% 55% 70% 30% / 45% 30% 70% 55%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 24px;
+            font-family: var(--font-display);
+            font-size: 18px;
+            box-shadow: 0 0 0 8px var(--bg-alt);
+        }
+
+        .step-item h4 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .step-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Feature Split */
+        .feature-split {
+            display: flex;
+            align-items: center;
+            gap: 64px;
+            margin-bottom: 80px;
+        }
+
+        .feature-split:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-img-box {
+            flex: 1;
+            background: linear-gradient(135deg, #F0F9FF, #E0F2FE);
+            padding: 40px;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-content h3 {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            display: none;
+            /* JS would toggle this */
+        }
+
+        /* Footer */
+        footer {
+            background: #0F172A;
+            color: var(--text-light);
+            padding: 80px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 64px;
+        }
+
+        .footer-brand h2 {
+            color: white;
+            margin-bottom: 16px;
+            font-family: var(--font-display);
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .feature-split,
+            .feature-split:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <span class="material-icons-round" style="color: var(--primary-blue);">cleaning_services</span>
+                MubClean
+            </a>
+            <nav class="nav-menu">
+                <a href="#beneficios" class="nav-link">Beneficios</a>
+                <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+                <a href="#empresas" class="nav-link">Empresas</a>
+                <a href="#clientes" class="nav-link">Clientes</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+            <div>
+                <a href="#" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;">Ingresar</a>
+                <a href="registro.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Registrar
+                    Empresa</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="badge animate-in">Plataforma #1 en Mérida</div>
+            <h1 class="animate-in" style="animation-delay: 0.1s; position: relative;">
+                <!-- Doodle Star -->
+                <svg class="doodle-shape" width="60" height="60" viewBox="0 0 50 50"
+                    style="top: -20px; right: 10%; transform: rotate(15deg); color: #FFBD2E;">
+                    <path fill="currentColor" d="M25 0L31 18L50 25L31 32L25 50L19 32L0 25L19 18Z" />
+                </svg>
+                Digitaliza tu negocio de<br>limpieza en
+                <span style="position: relative; display: inline-block;">
+                    Mérida
+                    <!-- Underline Squiggle -->
+                    <svg class="doodle-shape" width="100%" height="20" viewBox="0 0 200 20"
+                        style="bottom: -10px; left: 0; width: 100%; opacity: 1; color: var(--secondary-teal);">
+                        <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"
+                            d="M5 10 C 50 20, 150 0, 195 10" />
+                    </svg>
+                </span>
+            </h1>
+            <p class="hero-subtitle animate-in" style="animation-delay: 0.2s;">La plataforma todo‑en‑uno para
+                cotizaciones, agenda y gestión de clientes. Conecta con miles de usuarios que buscan tus servicios hoy
+                mismo.</p>
+
+            <div class="hero-actions animate-in" style="animation-delay: 0.3s;">
+                <a href="registro.html" class="btn btn-primary">
+                    Registrar mi empresa
+                    <span class="material-icons-round">arrow_forward</span>
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <span class="material-icons-round">search</span>
+                    Buscar servicios de limpieza
+                </a>
+            </div>
+
+            <!-- <div class="trust-text animate-in" style="animation-delay: 0.4s;">
+                <span class="material-icons-round"
+                    style="color: var(--secondary-teal); font-size: 18px;">check_circle</span>
+                Prueba gratis por 30 días. Sin tarjeta de crédito.
+            </div> -->
+
+            <!-- Dashboard Mockup Placeholder -->
+            <div style="margin-top: 60px; background: white; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); overflow: hidden; max-width: 900px; margin-left: auto; margin-right: auto; padding: 20px; border: 1px solid var(--border-light);"
+                class="animate-in" style="animation-delay: 0.5s;">
+                <div
+                    style="background: #F8FAFC; border-radius: 12px; height: 400px; display: flex; align-items: center; justify-content: center; color: var(--text-light);">
+                    <img src="img/banner.jpg" alt="Vista previa del panel"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Clave -->
+    <!-- Beneficios Clave -->
+    <!-- Beneficios Clave -->
+    <section id="beneficios" class="section section-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Potencia tu negocio</h2>
+                <p>Herramientas diseñadas específicamente para empresas de limpieza.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><span class="material-icons-round">request_quote</span></div>
+                    <h3>Cotizaciones inteligentes</h3>
+                    <p>Genera cotizaciones rápidas, claras y profesionales en segundos. Olvida los cálculos manuales y
+                        errores.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><span class="material-icons-round">event_available</span></div>
+                    <h3>Agenda optimizada</h3>
+                    <p>Organización automática de tus servicios. Visualiza tu disponibilidad y evita empalmes de
+                        horarios.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><span class="material-icons-round">payments</span></div>
+                    <h3>Pagos seguros</h3>
+                    <p>Todas las transacciones están protegidas dentro de la plataforma. Recibe tus ganancias sin
+                        complicaciones.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><span class="material-icons-round">location_on</span></div>
+                    <h3>Visibilidad local</h3>
+                    <p>Aparece justo cuando los clientes de tu zona te buscan. Posiciónate como la mejor opción en
+                        Mérida.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><span class="material-icons-round">schedule</span></div>
+                    <h3>Ahorro de tiempo</h3>
+                    <p>Menos llamadas telefónicas, más reservas digitales. Automatiza la gestión para enfocarte en
+                        crecer.</p>
+                </div>
+                <div class="card"
+                    style="background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark)); color: white;">
+                    <div class="card-icon" style="background: rgba(255,255,255,0.2); color: white;"><span
+                            class="material-icons-round">rocket_launch</span></div>
+                    <h3 style="color: white;">Comienza hoy</h3>
+                    <p style="color: rgba(255,255,255,0.8);">Únete a las empresas que ya están digitalizando sus
+                        servicios.</p>
+                    <a href="registro.html"
+                        style="margin-top: 20px; display: inline-block; background-color: white; color: var(--primary-blue); padding: 12px 24px; border-radius: 12px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Funciona -->
+    <section id="como-funciona" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="position: relative; display: inline-block;">
+                    ¿Cómo funciona MubClean?
+                    <svg class="doodle-shape" width="40" height="40" viewBox="0 0 50 50"
+                        style="top: -15px; right: -25px; color: var(--secondary-teal); opacity: 0.8;">
+                        <path fill="currentColor"
+                            d="M25,0 C35,0 45,10 45,20 C45,35 30,45 20,45 C10,45 0,30 0,20 C0,10 10,0 25,0 Z"
+                            style="transform: scale(0.6);" />
+                        <circle cx="35" cy="10" r="4" fill="#FF5F56" />
+                    </svg>
+                </h2>
+                <p>Un proceso simple y transparente para todos.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-circle">1</div>
+                    <h4>Registro</h4>
+                    <p>La empresa se registra y valida sus datos.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">2</div>
+                    <h4>Publicación</h4>
+                    <p>Configura servicios, precios y horarios.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">3</div>
+                    <h4>Búsqueda</h4>
+                    <p>El cliente encuentra tu servicio ideal.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">4</div>
+                    <h4>Agenda & Pago</h4>
+                    <p>Reserva confirmada y pago seguro.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">5</div>
+                    <h4>Servicio</h4>
+                    <p>Limpieza realizada y pago liberado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segmentos (Empresas y Clientes) -->
+    <section id="empresas" class="section section-white">
+        <div class="container">
+            <!-- Para Empresas -->
+            <div class="feature-split">
+                <div class="feature-content">
+                    <div class="badge">Para proveedores</div>
+                    <h3>Todo lo que necesitas para administrar tu empresa</h3>
+                    <p style="margin-bottom: 24px; color: var(--text-secondary);">El panel administrativo te da control
+                        total sobre tu negocio, desde cualquier dispositivo.</p>
+                    <ul class="feature-list">
+                        <li><span class="material-icons-round" style="color: var(--secondary-teal);">check_circle</span>
+                            Registro sencillo y rápido</li>
+                        <li><span class="material-icons-round" style="color: var(--secondary-teal);">check_circle</span>
+                            Panel administrativo web completo</li>
+                        <li><span class="material-icons-round" style="color: var(--secondary-teal);">check_circle</span>
+                            Historial de servicios y pagos</li>
+                        <li><span class="material-icons-round" style="color: var(--secondary-teal);">check_circle</span>
+                            Herramientas de reputación y reseñas</li>
+                    </ul>
+                    <a href="registro.html" class="btn btn-primary" style="margin-top: 24px;">Registrar mi
+                        empresa</a>
+                </div>
+                <div class="feature-img-box" style="background: transparent; padding: 0; display: block;">
+                    <img src="img/proveedores.png" alt="Panel de Proveedores"
+                        style="width: 100%; height: auto; display: block; border-radius: 20px;">
+                </div>
+            </div>
+
+            <!-- Para Clientes -->
+            <div id="clientes" class="feature-split" style="margin-top: 120px; margin-bottom: 0;">
+                <div class="feature-content">
+                    <div class="badge" style="background-color: #F0FDF4; color: var(--secondary-teal);">Para clientes
+                    </div>
+                    <h3>Encuentra limpieza de confianza en minutos</h3>
+                    <p style="margin-bottom: 24px; color: var(--text-secondary);">Olvídate de buscar en directorios o
+                        redes sociales. Todo lo que necesitas está en tu celular.</p>
+                    <ul class="feature-list">
+                        <li><span class="material-icons-round" style="color: var(--primary-blue);">check_circle</span>
+                            Comparación de precios y valoraciones</li>
+                        <li><span class="material-icons-round" style="color: var(--primary-blue);">check_circle</span>
+                            Agenda flexible y confirmaciones automáticas</li>
+                        <li><span class="material-icons-round" style="color: var(--primary-blue);">check_circle</span>
+                            Pagos digitales cifrados</li>
+                        <li><span class="material-icons-round" style="color: var(--primary-blue);">check_circle</span>
+                            Registro totalmente gratuito</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 24px;">Descargar App Clientes</a>
+                </div>
+                <div class="feature-img-box" style="background: transparent; padding: 0;">
+                    <img src="img/cliente.jpeg" alt="App de Clientes"
+                        style="width: 100%; height: auto; border-radius: 0; margin: 0 auto; display: block;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confianza y Seguridad -->
+    <section class="section section-alt" style="text-align: center;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tu seguridad es nuestra prioridad</h2>
+                <p>Construimos confianza en cada servicio.</p>
+            </div>
+
+            <div class="grid-3" style="text-align: left;">
+                <div
+                    style="background: white; padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: flex-start;">
+                    <span class="material-icons-round" style="font-size: 32px; color: var(--primary-blue);">lock</span>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">Pagos Protegidos</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Tecnología de encriptación bancaria
+                            para todas tus transacciones.</p>
+                    </div>
+                </div>
+                <div
+                    style="background: white; padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: flex-start;">
+                    <span class="material-icons-round"
+                        style="font-size: 32px; color: var(--primary-blue);">verified</span>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">Empresas Verificadas</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Validamos identidad y documentos de
+                            cada proveedor.</p>
+                    </div>
+                </div>
+                <div
+                    style="background: white; padding: 24px; border-radius: 16px; display: flex; gap: 16px; align-items: flex-start;">
+                    <span class="material-icons-round" style="font-size: 32px; color: var(--primary-blue);">star</span>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">Opiniones Reales</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">Solo usuarios que recibieron el
+                            servicio pueden calificar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section section-white">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-header">
+                <h2>Preguntas Frecuentes</h2>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Qué es MubClean?
+                    <span class="material-icons-round">expand_more</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Tiene costo registrarse?
+                    <span class="material-icons-round">expand_more</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Cómo se realizan los pagos?
+                    <span class="material-icons-round">expand_more</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿En qué zonas opera la plataforma?
+                    <span class="material-icons-round">expand_more</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    ¿Cómo contacto a una empresa?
+                    <span class="material-icons-round">expand_more</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section" style="background-color: var(--primary-blue); color: white; text-align: center;">
+        <div class="container">
+            <h2 style="color: white; font-size: 36px; margin-bottom: 24px;">¿Listo para empezar?</h2>
+            <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+                <a href="registro.html"
+                    style="background: white; color: var(--primary-blue); padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none;">Registrar
+                    mi empresa</a>
+                <a href="#"
+                    style="background: rgba(255,255,255,0.1); color: white; padding: 14px 32px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3);">Soy
+                    cliente</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo" style="color: white; margin-bottom: 24px;">
+                        <span class="material-icons-round">cleaning_services</span>
+                        MubClean
+                    </div>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">
+                        Hecho con pasión en Mérida, Yucatán.<br>
+                        Conectando espacios limpios con personas felices.
+                    </p>
+                    <div style="display: flex; gap: 16px;">
+                        <!-- Social placeholders -->
+                        <span class="material-icons-round"
+                            style="color: white; opacity: 0.6; cursor: pointer;">facebook</span>
+                        <span class="material-icons-round"
+                            style="color: white; opacity: 0.6; cursor: pointer;">photo_camera</span> <!-- Instagram -->
+                        <span class="material-icons-round"
+                            style="color: white; opacity: 0.6; cursor: pointer;">alternate_email</span>
+                        <!-- Twitter/X -->
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Plataforma</h4>
+                    <ul>
+                        <li><a href="#">Beneficios</a></li>
+                        <li><a href="#">Empresas</a></li>
+                        <li><a href="#">Clientes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Aviso de privacidad</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="#">Soporte</a></li>
+                        <li><a href="#">hola@mubclean.com</a></li>
+                        <li><a href="#">Mérida, Yucatán</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 MubClean. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>
