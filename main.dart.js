@@ -119911,7 +119911,7 @@ A.as7.prototype={
 zN(a,b,c){return this.aE7(a,b,c)},
 aE7(a1,a2,a3){var s=0,r=A.q(t.H),q=1,p=[],o=this,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0
 var $async$zN=A.m(function(a4,a5){if(a4===1){p.push(a5)
-s=q}for(;;)switch(s){case 0:a=A.dA("http://192.168.137.1:3000/create_preference",0,null)
+s=q}for(;;)switch(s){case 0:a=A.dA("https://mi-backend-c2yr.onrender.com/create_preference",0,null)
 A.et().$1("Calling backend URL: "+A.e(a))
 g=$.dQ().b
 g===$&&A.a()
