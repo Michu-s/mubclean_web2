@@ -120969,7 +120969,7 @@ $2(a,b){var s,r,q,p,o,n,m,l=this,k=null,j=A.al(a,k,t.l).w,i=A.bU(A.aJ(k,k,B.o,k,
 e=A.b1(A.b([A.O(e,k,k,k,k,B.WC.cj(B.j),k,k,k),A.dV(k,k,k,B.a6D,k,k,new A.aLY(d),k,k,k,k)],c),B.n,B.cq,B.i,0,k)
 s=l.a
 r=s.a
-q=A.uL(k,"Tipo de mueble",B.CH)
+q=A.uL(k,"Selecciona el servicio",B.CH)
 p=l.b
 o=J.dK(p.ax,new A.aLZ(),t.yQ)
 o=A.a2(o,o.$ti.i("am.E"))
